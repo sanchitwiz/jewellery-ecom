@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import React, { useState } from "react";
 
 const ProductDescription: React.FC = () => {
@@ -18,7 +19,7 @@ const ProductDescription: React.FC = () => {
         <div className="flex flex-wrap -mx-4">
           {/* Product Images */}
           <div className="w-full md:w-1/2 px-4 mb-8">
-            <img
+            <Image
               src={mainImage}
               alt="Product"
               className="w-full h-auto rounded-lg shadow-md mb-4"
@@ -30,7 +31,7 @@ const ProductDescription: React.FC = () => {
                 "https://images.unsplash.com/photo-1496957961599-e35b69ef5d7c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw4fHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080",
                 "https://images.unsplash.com/photo-1528148343865-51218c4a13e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwzfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080",
               ].map((src, index) => (
-                <img
+                <Image
                   key={index}
                   src={src}
                   alt={`Thumbnail ${index + 1}`}
