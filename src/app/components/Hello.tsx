@@ -3,7 +3,7 @@ import React from 'react'
 const Hello = () => {
   return (
     <div>
-      \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\DICKK PICSKKKKKKKSSSSS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+        Prince ke mummy ko machaar ne mara
     </div>
   )
 }
