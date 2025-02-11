@@ -2,8 +2,8 @@ import Image from 'next/image'
 import {  HeroCarousel } from './components/carausel'
 import Navbar from './components/Navbar'
 import { RiLeafLine } from 'react-icons/ri';
-// import { GiPurity, GiCrystalGrowth } from 'react-icons/gi';
 import { MdOutlineSecurity } from 'react-icons/md';
+import { MdWorkspacePremium } from "react-icons/md";
 
 
 export default function Home() {
@@ -23,7 +23,7 @@ export default function Home() {
             {['Traditional', 'Contemporary', 'Bridal'].map((collection) => (
               <div key={collection} className="relative group cursor-pointer overflow-hidden rounded-lg">
                 <Image 
-                  src={`/collections/${collection.toLowerCase()}.jpg`} 
+                  src="https://plus.unsplash.com/premium_photo-1674255466849-b23fc5f5d3eb?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8amV3ZWxlcnl8ZW58MHx8MHx8fDA%3D"
                   alt={collection}
                   width={400}
                   height={500}
@@ -76,7 +76,7 @@ export default function Home() {
                 <div key={category} className="bg-white rounded-lg shadow-md overflow-hidden group">
                   <div className="relative">
                     <Image 
-                      src={`/categories/${category.toLowerCase().replace(' ', '-')}.jpg`}
+                      src="https://plus.unsplash.com/premium_photo-1681276170092-446cd1b5b32d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGpld2VsZXJ5fGVufDB8MXwwfHx8MA%3D%3D"
                       alt={category}
                       width={400}
                       height={300}
@@ -106,7 +106,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center">
                 <div className="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  
+                <MdWorkspacePremium className="text-3xl text-green-600" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">Premium Quality</h3>
                 <p className="text-gray-600">Every piece is crafted with the finest materials and attention to detail</p>
