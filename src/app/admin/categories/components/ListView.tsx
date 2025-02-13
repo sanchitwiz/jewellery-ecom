@@ -15,7 +15,12 @@ interface Category {
 }
 
 export default function ListView(): JSX.Element {
-  const { data: categories, error, isLoading } = useCategories();
+  const { data: categoriesData, error, isLoading } = useCategories();
+  const categories: Category[] = categoriesData?.map((doc) => ({
+    id: doc.id,
+    name: doc.name,
+    imageURL: doc.imageURL,
+  })) || [];
 
   if (isLoading) {
     return (
