@@ -1,7 +1,7 @@
 "use client";
 
-import { getCategory } from "@/lib/firestore/categories/read_server.jsx";
-import { createNewCategory, updateCategory } from "@/lib/firestore/categories/write.jsx";
+import { getCategory } from "@/lib/firestore/categories/read_server";
+import { createNewCategory, updateCategory } from "@/lib/firestore/categories/write";
 import { Button } from "@nextui-org/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { JSX, useEffect, useState } from "react";
