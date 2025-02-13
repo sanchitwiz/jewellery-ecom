@@ -178,7 +178,7 @@ const Navbar: React.FC = () => {
       </div>
       <AuthContextProvider>
           <LogoutButton />
-        </AuthContextProvider>
+      </AuthContextProvider>
     </nav>
   );
 };
