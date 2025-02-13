@@ -2,12 +2,20 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: [
-      'source.unsplash.com',
-      'images.unsplash.com',
-      'plus.unsplash.com',
-      'unsplash.com' // Add this line
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.miabytanishq.com",
+      },
     ],
+    domains: [
+      "source.unsplash.com",
+      "images.unsplash.com",
+      "plus.unsplash.com",
+      "unsplash.com",
+      "www.miabytanishq.com", // Added missing domain
+    ],
+    unoptimized: true, // Optional: Disable optimization if needed
   },
 };
 

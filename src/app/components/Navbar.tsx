@@ -6,6 +6,8 @@ import { CgHeart, CgProfile, CgShoppingCart } from 'react-icons/cg';
 import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import Link from 'next/link';
 import logo from '@/assets/logo.png';
+import AuthContextProvider from '@/context/AuthContext';
+import LogoutButton from './LogoutButton';
 
 const Navbar: React.FC = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -74,7 +76,7 @@ const Navbar: React.FC = () => {
         <div className="hidden md:flex items-center space-x-6">
           {[
             { icon: CgHeart, href: '/favourite', count: 0 },
-            { icon: CgProfile, href: '/profile' },
+            { icon: CgProfile, href: '/login' },
             { icon: CgShoppingCart, href: '/cart', count: cartItems }
           ].map(({ icon: Icon, href, count }, index) => (
             <Link key={index} href={href}>
@@ -174,6 +176,9 @@ const Navbar: React.FC = () => {
           </div>
         )}
       </div>
+      <AuthContextProvider>
+          <LogoutButton />
+        </AuthContextProvider>
     </nav>
   );
 };

@@ -68,7 +68,7 @@ export default function FeaturedProducts() {
               <h3 className="text-lg font-normal text-gray-900 mb-1">{product.name}</h3>
               <div className="flex items-center justify-between">
                 <p className="text-xl font-medium text-gray-900">${product.price}</p>
-                <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+                <button className="p-2 hover:bg-gray-100 rounded-full transition-colors" title="Add to Cart">
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     className="h-5 w-5" 
