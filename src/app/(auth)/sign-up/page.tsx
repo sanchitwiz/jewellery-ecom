@@ -48,7 +48,8 @@ export default function Page() {
       });
 
       toast.success("Successfully Signed Up");
-      router.push("/account");
+      // router.push("/account");
+      router.push(`/`);
     } catch (error: unknown) {
         if (error instanceof Error) {
           toast.error(error.message);

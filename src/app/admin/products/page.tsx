@@ -1,11 +1,7 @@
-import React from 'react'
-
-const page = () => {
+export default function CustomersPage() {
   return (
-    <div>
-      
-    </div>
-  )
+      <div className="p-10">
+      <h1>Products</h1>
+      </div>
+  );
 }
-
-export default page

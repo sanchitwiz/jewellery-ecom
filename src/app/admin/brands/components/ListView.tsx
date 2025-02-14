@@ -1,22 +1,22 @@
 "use client";
 
-import { useCategories } from "@/lib/firestore/categories/read";
-import { deleteCategory } from "@/lib/firestore/categories/write";
+import { useBrands } from "@/lib/firestore/brands/read";
+import { deleteBrand } from "@/lib/firestore/brands/write";
 import { Button, CircularProgress } from "@nextui-org/react";
 import { Edit2, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { JSX, useState } from "react";
 import toast from "react-hot-toast";
 
-interface Category {
+interface Brand {
   id: string;
   name: string;
   imageURL: string;
 }
 
 export default function ListView(): JSX.Element {
-  const { data: categoriesData, error, isLoading } = useCategories();
-  const categories: Category[] = categoriesData?.map((doc) => ({
+  const { data: brandsData, error, isLoading } = useBrands();
+  const brands: Brand[] = brandsData?.map((doc) => ({
     id: doc.id,
     name: doc.name,
     imageURL: doc.imageURL,
@@ -36,7 +36,7 @@ export default function ListView(): JSX.Element {
 
   return (
     <div className="flex-1 flex flex-col gap-3 md:pr-5 md:px-0 px-5 rounded-xl">
-      <h1 className="text-xl font-semibold">Categories</h1>
+      <h1 className="text-xl font-semibold">Brands</h1>
       <table className="border-separate border-spacing-y-3">
         <thead>
           <tr>
@@ -47,7 +47,7 @@ export default function ListView(): JSX.Element {
           </tr>
         </thead>
         <tbody>
-          {categories?.map((item: Category, index: number) => (
+          {brands?.map((item: Brand, index: number) => (
             <Row key={item.id} item={item} index={index} />
           ))}
         </tbody>
@@ -57,7 +57,7 @@ export default function ListView(): JSX.Element {
 }
 
 interface RowProps {
-  item: Category;
+  item: Brand;
   index: number;
 }
 
@@ -70,7 +70,7 @@ function Row({ item, index }: RowProps): JSX.Element {
 
     setIsDeleting(true);
     try {
-      await deleteCategory({ id: item.id });
+      await deleteBrand({ id: item.id });
       toast.success("Successfully Deleted");
     } catch (error: any) {
       toast.error(error?.message || "Failed to delete category");
@@ -80,7 +80,7 @@ function Row({ item, index }: RowProps): JSX.Element {
   };
 
   const handleUpdate = () => {
-    router.push(`/admin/categories?id=${item?.id}`);
+    router.push(`/admin/brands?id=${item?.id}`);
   };
 
   return (

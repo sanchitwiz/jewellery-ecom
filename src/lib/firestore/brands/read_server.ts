@@ -2,38 +2,37 @@ import { db } from "@/lib/firebase";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 
 // Define Category interface
-interface Category {
+interface Brands {
   id?: string;
   name: string;
-  slug: string;
   imageUrl?: string;
 }
 
 // Define parameter type for getCategory
-interface GetCategoryParams {
+interface GetBrandParams {
   id: string;
 }
 
-export const getCategory = async ({ id }: GetCategoryParams): Promise<Category | null> => {
-  const docRef = doc(db, "categories", id);
+export const getBrand = async ({ id }: GetBrandParams): Promise<Brands | null> => {
+  const docRef = doc(db, "brands", id);
   const snapshot = await getDoc(docRef);
   
   if (snapshot.exists()) {
     return {
       id: snapshot.id,
       ...snapshot.data()
-    } as Category;
+    } as Brands;
   }
   return null;
 };
 
 
-export const getCategories = async (): Promise<Category[]> => {
-  const collectionRef = collection(db, "categories");
+export const getBrands = async (): Promise<Brands[]> => {
+  const collectionRef = collection(db, "brands");
   const snapshot = await getDocs(collectionRef);
   
   return snapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data()
-  }) as Category);
+  }) as Brands);
 };

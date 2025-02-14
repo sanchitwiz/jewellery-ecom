@@ -1,54 +1,61 @@
 "use client";
 
-import { useCategories } from "@/lib/firestore/categories/read";
-import { deleteCategory } from "@/lib/firestore/categories/write";
+import { useAdmins } from "@/lib/firestore/admins/read";
+import { deleteAdmin } from "@/lib/firestore/admins/write";
 import { Button, CircularProgress } from "@nextui-org/react";
 import { Edit2, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { JSX, useState } from "react";
 import toast from "react-hot-toast";
 
-interface Category {
+interface Admin {
   id: string;
   name: string;
+  email: string;
   imageURL: string;
 }
 
 export default function ListView(): JSX.Element {
-  const { data: categoriesData, error, isLoading } = useCategories();
-  const categories: Category[] = categoriesData?.map((doc) => ({
+  const { data: adminsData, error, isLoading } = useAdmins();
+  const admins: Admin[] = adminsData?.map((doc) => ({
     id: doc.id,
-    name: doc.name,
+    name: doc.name || "",
+    email: doc.email,
     imageURL: doc.imageURL,
   })) || [];
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center">
+      <div>
         <CircularProgress />
       </div>
     );
   }
-  
   if (error) {
-    return <div className="text-red-500">{error}</div>;
+    return <div>{error}</div>;
   }
-
+  
   return (
     <div className="flex-1 flex flex-col gap-3 md:pr-5 md:px-0 px-5 rounded-xl">
-      <h1 className="text-xl font-semibold">Categories</h1>
+      <h1 className="text-xl">Admins</h1>
       <table className="border-separate border-spacing-y-3">
         <thead>
           <tr>
-            <th className="font-semibold border-y bg-white px-3 py-2 border-l rounded-l-lg">SN</th>
+            <th className="font-semibold border-y bg-white px-3 py-2 border-l rounded-l-lg">
+              SN
+            </th>
             <th className="font-semibold border-y bg-white px-3 py-2">Image</th>
-            <th className="font-semibold border-y bg-white px-3 py-2 text-left">Name</th>
-            <th className="font-semibold border-y bg-white px-3 py-2 border-r rounded-r-lg text-center">Actions</th>
+            <th className="font-semibold border-y bg-white px-3 py-2 text-left">
+              Name
+            </th>
+            <th className="font-semibold border-y bg-white px-3 py-2 border-r rounded-r-lg text-center">
+              Actions
+            </th>
           </tr>
         </thead>
         <tbody>
-          {categories?.map((item: Category, index: number) => (
-            <Row key={item.id} item={item} index={index} />
+          {admins?.map((item: Admin, index: number) => (
+            <Row index={index} item={item} key={item.id} />
           ))}
         </tbody>
       </table>
@@ -57,7 +64,7 @@ export default function ListView(): JSX.Element {
 }
 
 interface RowProps {
-  item: Category;
+  item: Admin;
   index: number;
 }
 
@@ -65,22 +72,22 @@ function Row({ item, index }: RowProps): JSX.Element {
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const router = useRouter();
 
-  const handleDelete = async () => {
+  const handleDelete = async (): Promise<void> => {
     if (!confirm("Are you sure?")) return;
 
     setIsDeleting(true);
     try {
-      await deleteCategory({ id: item.id });
+      await deleteAdmin({ id: item.id });
       toast.success("Successfully Deleted");
-    } catch (error: any) {
-      toast.error(error?.message || "Failed to delete category");
-    } finally {
-      setIsDeleting(false);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Failed to delete admin";
+      toast.error(errorMessage);
     }
+    setIsDeleting(false);
   };
 
-  const handleUpdate = () => {
-    router.push(`/admin/categories?id=${item?.id}`);
+  const handleUpdate = (): void => {
+    router.push(`/admin/admins?id=${item.id}`);
   };
 
   return (
@@ -90,16 +97,25 @@ function Row({ item, index }: RowProps): JSX.Element {
       </td>
       <td className="border-y bg-white px-3 py-2 text-center">
         <div className="flex justify-center">
-          <img className="h-10 w-10 object-cover rounded-md" src={item.imageURL} alt={item.name} />
+          <img
+            className="h-10 w-10 object-cover rounded-lg"
+            src={item.imageURL}
+            alt={item.name}
+          />
         </div>
       </td>
-      <td className="border-y bg-white px-3 py-2">{item.name}</td>
+      <td className="border-y bg-white px-3 py-2">
+        <div className="flex flex-col">
+          <h2>{item.name}</h2>
+          <h3 className="text-xs text-gray-500">{item.email}</h3>
+        </div>
+      </td>
       <td className="border-y bg-white px-3 py-2 border-r rounded-r-lg">
         <div className="flex gap-2 items-center">
-          <Button
-            onClick={handleUpdate}
-            isDisabled={isDeleting}
-            isIconOnly
+          <Button 
+            onClick={handleUpdate} 
+            isDisabled={isDeleting} 
+            isIconOnly 
             size="sm"
           >
             <Edit2 size={13} />

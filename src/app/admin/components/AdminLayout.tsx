@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, ReactNode } from "react";
+import { useEffect, useRef, useState, ReactNode, JSX } from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import { usePathname } from "next/navigation";

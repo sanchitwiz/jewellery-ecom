@@ -40,9 +40,12 @@ export default function Page() {
 
     setIsLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, data.email, data.password);
-      console.log('logged in ')
-      toast.success("Logged In Successfully");
+      const doneLogin = await signInWithEmailAndPassword(auth, data.email, data.password);
+      if(doneLogin){
+        console.log('logged in ')
+        toast.success("Logged In Successfully");
+        router.replace(`/`);
+      }
     } catch (error: unknown) {
       if (error instanceof Error) {
         // console.log("no")
@@ -56,11 +59,11 @@ export default function Page() {
     }
   };
 
-  useEffect(() => {
-    if (user) {
-      router.push("/");
-    }
-  }, [user, router]);
+  // useEffect(() => {
+  //   if (user) {
+  //     router.push("/");
+  //   }
+  // }, [user, router]);
 
   return (
     <main className="w-full flex justify-center items-center bg-gray-300 md:p-24 p-10 min-h-screen">

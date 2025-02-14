@@ -76,8 +76,8 @@ const Navbar: React.FC = () => {
         <div className="hidden md:flex items-center space-x-6">
           {[
             { icon: CgHeart, href: '/favourite', count: 0 },
-            { icon: CgProfile, href: '/login' },
-            { icon: CgShoppingCart, href: '/cart', count: cartItems }
+            { icon: CgShoppingCart, href: '/cart', count: cartItems },
+            { icon : CgProfile, href: '/login'}
           ].map(({ icon: Icon, href, count }, index) => (
             <Link key={index} href={href}>
               <button className="relative hover:text-blue-600 transition-colors duration-200 group p-2">
